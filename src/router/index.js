@@ -68,11 +68,12 @@ const asyncRoutes = [
         path: "menus",
         component: () =>
           import(
-            /* webpackChunkName: "role" */ "../views/systemConfig/role/Index.vue"
+            /* webpackChunkName: "menus" */ "../views/systemConfig/role/Index.vue"
           ),
         meta: {
           title: "多级菜单",
           roles: [roleEnum.ADMIN],
+          icon: "menu",
         },
         children: [
           {
@@ -84,6 +85,7 @@ const asyncRoutes = [
             meta: {
               title: "1-1",
               roles: [roleEnum.ADMIN],
+              icon: "upload",
             },
             children: [
               {
@@ -95,6 +97,7 @@ const asyncRoutes = [
                 meta: {
                   title: "1-1-1",
                   roles: [roleEnum.ADMIN],
+                  icon: "upload",
                 },
                 children: [
                   {

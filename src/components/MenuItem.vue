@@ -5,6 +5,10 @@
       :index="prop.menu.path"
     >
       <template slot="title">
+        <i
+          v-if="prop.menu.meta && prop.menu.meta.icon"
+          :class="`el-icon-${prop.menu.meta.icon}`"
+        ></i>
         <span>{{ prop.menu.meta && prop.menu.meta.title }}</span>
       </template>
       <MenuItem
@@ -13,9 +17,13 @@
         :menu="subMenu"
       ></MenuItem>
     </el-submenu>
-    <el-menu-item v-else :index="prop.menu.path">{{
-      prop.menu.meta && prop.menu.meta.title
-    }}</el-menu-item>
+    <el-menu-item v-else :index="prop.menu.path">
+      <i
+        v-if="prop.menu.meta && prop.menu.meta.icon"
+        :class="`el-icon-${prop.menu.meta.icon}`"
+      ></i>
+      <template #title>{{ prop.menu.meta && prop.menu.meta.title }}</template>
+    </el-menu-item>
   </div>
 </template>
 

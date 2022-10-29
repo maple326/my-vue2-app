@@ -24,7 +24,7 @@ mock(/sales\/api\/login\/pc/, (opt) => {
       token: Random.id(),
       expiresIn: null,
       roleIds: [1, 2],
-      companyId: /sales/api,
+      companyId: Random.id(),
       companyName: Random.ctitle(),
       systemId: Random.name(),
     },
