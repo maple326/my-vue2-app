@@ -1,0 +1,46 @@
+@import 'variables.scss';
+@import 'custom.scss';
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+textarea {
+  font-family: $font-family;
+}
+
+.btn {
+  &-icon {
+    &:before {
+      content: '';
+      display: inline-block;
+      margin-right: 4px;
+      width: 16px;
+      height: 16px;
+      background-size: 100%;
+      vertical-align: text-top;
+    }
+  }
+  &-edit {
+    &:before {
+      background-image: url('~@/assets/icon/edit.png');
+    }
+  }
+  &-remove {
+    &:before {
+      background-image: url('~@/assets/icon/del.png');
+    }
+  }
+  &-view {
+    &:before {
+      background-image: url('~@/assets/icon/see.png');
+    }
+  }
+  &-download {
+    &:before {
+      background-image: url('~@/assets/icon/download.png');
+    }
+  }
+}

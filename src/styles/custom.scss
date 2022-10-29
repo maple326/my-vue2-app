@@ -1,0 +1,87 @@
+.my-form--condition {
+
+  .el-input,
+  .el-select {
+    .el-input__inner {
+      width: $input-width;
+      height: 32px;
+    }
+  }
+}
+
+.my-btn {
+  padding: 0 15px;
+  height: 34px;
+
+  &+& {
+    margin-left: 14px;
+  }
+}
+
+.my-table {
+  &.el-table {
+    .el-table__header {
+      .el-table__cell {
+        text-align: center;
+
+        div.cell {
+          padding: 0;
+        }
+      }
+    }
+
+    .el-table__body {
+      .el-table__cell {
+        padding: 0;
+        height: 40px;
+
+        &.text-left {
+          .cell {
+            text-align: left;
+          }
+        }
+
+        &.text-index {
+          .cell {
+            padding: 0;
+          }
+        }
+
+        &.text-right {
+          .cell {
+            text-align: right;
+          }
+        }
+
+        &.text-input {
+          .cell {
+            padding: 0;
+            height: 100%;
+          }
+        }
+
+        .cell {
+          height: auto;
+          padding: 0 24px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+.my-dialog {
+  .el-dialog {
+    &__header {
+      padding: 24px 24px 18px;
+    }
+
+    &__body {
+      padding: 0 24px;
+
+      .el-row {
+        margin-bottom: 12px;
+      }
+    }
+  }
+}
