@@ -14,6 +14,28 @@ const loadingManage = new LoadingManage({
   },
 });
 
+const pendingRequest = new Map();
+
+const addPendingRequest = (config) => {
+  let { method, url, params } = config;
+  let key = `${method} ${url} ${JSON.stringify(params)}`;
+  config.cancelToken = new axios.CancelToken((cancel) => {
+    if (pendingRequest.has(key)) {
+      cancel();
+    } else {
+      pendingRequest.set(key, cancel);
+    }
+  });
+};
+
+const removePendingRequest = (config) => {
+  let { method, url, params } = config;
+  let key = `${method} ${url} ${JSON.stringify(params)}`;
+  if (pendingRequest.has(key)) {
+    pendingRequest.delete(key);
+  }
+};
+
 export default class HttpRequest {
   constructor(baseURL) {
     this.baseURL = baseURL;
@@ -40,7 +62,8 @@ export default class HttpRequest {
   interceptors(instance) {
     instance.interceptors.request.use(
       async (config) => {
-        loadingManage.add(config.hideLoading);
+        addPendingRequest(config);
+        // loadingManage.add(config.hideLoading);
         if (config.requireAuth) {
           config.headers.token = await store.dispatch("user/getToken", {
             diableGetAuth: config.diableGetAuth,
@@ -55,7 +78,8 @@ export default class HttpRequest {
     );
     instance.interceptors.response.use(
       (response) => {
-        loadingManage.close();
+        removePendingRequest(response.config);
+        // loadingManage.close();
         let { status, data } = response;
         if (status === 200) {
           if (response.config.isBlob) {
@@ -101,6 +125,7 @@ export default class HttpRequest {
         return Promise.reject(response);
       },
       (error) => {
+        console.log(error);
         loadingManage.close();
         return Promise.reject(error);
       }

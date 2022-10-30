@@ -47,7 +47,7 @@ mock(/company\/list/, (opt) => {
   return {
     code: 200,
     data: {
-      count: 3,
+      total: 50,
       records: arr,
     },
     msg: "提交成功",

@@ -2,6 +2,7 @@
   <Container title="企业管理" show-add-btn @add="onAdd">
     <router-view></router-view>
     <el-row type="flex" justify="end">
+      <el-button @click="onQuery">查询</el-button>
       <el-button @click="onExport">导出Excel</el-button>
     </el-row>
     <el-form>
@@ -99,7 +100,6 @@ const { getList, list, getDetail, total } = useEnterprise();
 
 const onQuery = () => {
   getList(condition.value);
-  console.log(list);
 };
 
 watch(
