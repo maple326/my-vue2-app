@@ -33,6 +33,10 @@ module.exports = defineConfig({
     resolve: {
       alias: {
         components: resolve("src/components"),
+        router: resolve("src/router"),
+        store: resolve("src/store"),
+        utils: resolve("src/utils"),
+        api: resolve("src/api"),
       },
     },
   },

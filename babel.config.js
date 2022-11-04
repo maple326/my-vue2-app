@@ -9,4 +9,9 @@ module.exports = {
       },
     ],
   ],
+  env: {
+    development: {
+      plugins: ["babel-plugin-dynamic-import-node"],
+    },
+  },
 };

@@ -40,8 +40,8 @@ const asyncRoutes = [
     },
     children: [
       {
-        path: "enterprise",
-        name: "enterprise",
+        path: "export",
+        name: "export",
         component: () =>
           import(
             /* webpackChunkName: "systemConfig" */ "../views/systemConfig/enterprise/Index.vue"
@@ -52,7 +52,7 @@ const asyncRoutes = [
         },
         children: [
           {
-            path: "export",
+            path: "enterprise",
             component: () =>
               import(
                 /* webpackChunkName: "enterprise" */ "../views/systemConfig/enterprise/Export.vue"
@@ -181,6 +181,7 @@ const router = new VueRouter({
 const LOGIN_NAME = "login";
 
 router.beforeEach(async (to, from, next) => {
+  console.log(from, to);
   if (store.state.user.token) {
     // const roles = await store.dispatch("user/getRole");
     const roles = [1, 2];
@@ -261,6 +262,7 @@ function hasRoute(to) {
     .find((item) =>
       item.name ? item.name === to.name : item.path === to.path
     );
+  console.log(router.getRoutes());
   return !!find;
 }
 

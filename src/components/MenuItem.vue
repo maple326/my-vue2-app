@@ -15,9 +15,10 @@
         v-for="subMenu in prop.menu.children"
         :key="subMenu.path"
         :menu="subMenu"
+        :basePath="resolvePath(prop.basePath, prop.menu.path)"
       ></MenuItem>
     </el-submenu>
-    <el-menu-item v-else :index="prop.menu.path">
+    <el-menu-item v-else :index="resolvePath(prop.basePath, prop.menu.path)">
       <i
         v-if="prop.menu.meta && prop.menu.meta.icon"
         :class="`el-icon-${prop.menu.meta.icon}`"
@@ -39,7 +40,11 @@ const prop = defineProps({
     type: Object,
     default: () => ({}),
   },
+  basePath: String,
 });
+
+const resolvePath = (basePath, path) =>
+  (basePath = basePath ? `${basePath}/${path}` : path);
 </script>
 
 <style lang="sass" scoped>

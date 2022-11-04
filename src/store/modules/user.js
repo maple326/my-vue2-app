@@ -17,6 +17,7 @@ const state = {
   userInfo: storage.load(USER_INFO),
   token: localStorage.getItem(TOKEN),
   routes: null,
+  cache: {},
 };
 
 const getters = {
@@ -124,6 +125,9 @@ const mutations = {
   SET_PWD_STATUS(state, val) {
     state.pwdStatus = val;
     val ? storage.save(PWD_STATUS, val) : localStorage.removeItem(PWD_STATUS);
+  },
+  SET_CACHE(state, { key, val }) {
+    state.cache[key] = val;
   },
 };
 
