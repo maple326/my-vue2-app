@@ -27,9 +27,7 @@ export const loadScript = (src) => {
 
 export const getURLString = (name, url = location.href) => {
   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-  let index = url.indexOf("?");
-  if (index > -1) url = url.slice(index + 1);
-  var r = url.match(reg);
+  var r = url.slice(url.indexOf("?") + 1).match(reg);
   if (r != null) return decodeURIComponent(r[2]);
   return null;
 };
