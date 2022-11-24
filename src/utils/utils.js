@@ -25,9 +25,11 @@ export const loadScript = (src) => {
   });
 };
 
-const getURLString = (name) => {
+export const getURLString = (name, url = location.href) => {
   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-  var r = window.location.search.substr(1).match(reg);
+  let index = url.indexOf("?");
+  if (index > -1) url = url.slice(index + 1);
+  var r = url.match(reg);
   if (r != null) return decodeURIComponent(r[2]);
   return null;
 };
