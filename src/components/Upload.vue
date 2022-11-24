@@ -222,7 +222,7 @@ export default {
     },
     async handlePreview(file) {
       let { name, url } = file.response;
-      let sid = this.$utils.getQuery("sid", url);
+      let sid = this.$utils.getURLString("sid", url);
       url = url.replace(`sid=${sid}`, "");
       url = path.resolve("/portal/r", url);
       url = `${

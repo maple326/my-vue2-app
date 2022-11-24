@@ -25,22 +25,15 @@ export const loadScript = (src) => {
   });
 };
 
-export const getQuery = (name, url = location.href) => {
-  const index = url.lastIndexOf("?");
-  if (index !== -1) {
-    const queryStrArr = url.substr(index + 1).split("&");
-    for (var i = 0; i < queryStrArr.length; i++) {
-      const itemArr = queryStrArr[i].split("=");
-      if (itemArr[0] === name) {
-        return itemArr[1];
-      }
-    }
-  }
+const getURLString = (name) => {
+  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+  var r = window.location.search.substr(1).match(reg);
+  if (r != null) return decodeURIComponent(r[2]);
   return null;
 };
 
 export const setQuery = (name, val = "", url = location.href) => {
-  let oldVal = getQuery(name, url);
+  let oldVal = getURLString(name, url);
   if (url.includes(`${name}=${oldVal}`)) {
     url = url.replace(`${name}=${oldVal}`, `${name}=${val}`);
   } else {
@@ -143,7 +136,7 @@ const hasRole = ($route, roleName) => {
 export default {
   paddingZero,
   loadScript,
-  getQuery,
+  getURLString,
   setQuery,
   download,
   downloadBinary,

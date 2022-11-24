@@ -1,6 +1,6 @@
 import storage from "@/utils/storage";
 import api from "@/api";
-import { getQuery } from "@/utils/utils";
+import { getURLString } from "@/utils/utils";
 import router from "@/router";
 
 const PREFIX = "MIDDLE_LONG_TERM_";
@@ -91,7 +91,7 @@ const mutations = {
   RESET_SID(state) {
     state.sid = "";
     localStorage.removeItem(SID);
-    location = location.href.replace(`${SID}=${getQuery(SID)}`, "");
+    location = location.href.replace(`${SID}=${getURLString(SID)}`, "");
   },
   // 重置token
   RESET_TOKEN(state) {
@@ -139,7 +139,7 @@ const actions = {
   },
   getCode({ dispatch }, { diableGetAuth } = {}) {
     return new Promise(async (resolve) => {
-      let code = getQuery(CODE);
+      let code = getURLString(CODE);
       if (code) {
         resolve(code);
         return;
@@ -153,7 +153,7 @@ const actions = {
   },
   getUserId({ dispatch, commit }, { diableGetAuth } = {}) {
     return new Promise(async (resolve, reject) => {
-      let userId = getQuery(USER_ID) || localStorage.getItem(USER_ID);
+      let userId = getURLString(USER_ID) || localStorage.getItem(USER_ID);
       if (userId) {
         resolve(userId);
         return;
@@ -175,7 +175,7 @@ const actions = {
   },
   getProcessId() {
     return Promise.resolve(
-      getQuery(PROCESS_ID) || localStorage.getItem(PROCESS_ID)
+      getURLString(PROCESS_ID) || localStorage.getItem(PROCESS_ID)
     );
   },
   getSid({ dispatch, commit }, { userId, isRenew } = {}) {
@@ -227,11 +227,13 @@ const actions = {
     });
   },
   getTaskId() {
-    return Promise.resolve(getQuery(TASK_ID) || localStorage.getItem(TASK_ID));
+    return Promise.resolve(
+      getURLString(TASK_ID) || localStorage.getItem(TASK_ID)
+    );
   },
   getUid({ dispatch }) {
     return new Promise(async (resolve) => {
-      let uid = getQuery(UID);
+      let uid = getURLString(UID);
       if (uid) {
         resolve(uid);
         return;
